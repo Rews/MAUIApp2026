@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "01 News feed": {
+      "commandName": "Project",
+      "commandLineArgs": "--demo"
+    },
+    "02 References and null": {
+      "commandName": "Project",
+      "commandLineArgs": "--references"
+    },
+    "03 Task and await": {
+      "commandName": "Project",
+      "commandLineArgs": "--async"
+    },
+    "04 Preview input": {
+      "commandName": "Project",
+      "commandLineArgs": "--interactive"
+    },
+    "05 Model errors": {
+      "commandName": "Project",
+      "commandLineArgs": "--errors"
+    }
+  }
+}
