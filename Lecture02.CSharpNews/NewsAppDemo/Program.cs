@@ -29,8 +29,14 @@ internal static class Program
             case "--errors":
                 ShowErrors();
                 return 0;
+            case "--delegates":
+                ShowDelegates();
+                return 0;
+            case "--events":
+                ShowEvents();
+                return 0;
             default:
-                Console.WriteLine("Режимы: --demo, --references, --async, --interactive, --errors");
+                Console.WriteLine("Режимы: --demo, --references, --async, --interactive, --errors, --delegates, --events");
                 return 1;
         }
     }
@@ -79,6 +85,46 @@ internal static class Program
     {
         await Task.Delay(500);
         return "УрФУ: библиотека";
+    }
+
+    private static void ShowDelegates()
+    {
+        var article = CreateArticle();
+        Action<NewsArticle> showTitle =
+            n => Console.WriteLine(n.Title);
+        Func<NewsArticle, string> getTitle =
+            n => n.Title;
+
+        showTitle(article);
+        string title = getTitle(article);
+        Console.WriteLine(title);
+
+        Console.WriteLine("Передаём Action в ShowArticle:");
+        ShowArticle(article, showTitle);
+    }
+
+    private static void ShowArticle(NewsArticle article, Action<NewsArticle> show)
+    {
+        show(article);
+    }
+
+    private static void ShowEvents()
+    {
+        var article = CreateArticle();
+        Action<NewsArticle> handler =
+            n => Console.WriteLine(n.Title);
+
+        Console.WriteLine("Подписываем обработчик и меняем заголовок:");
+        article.TitleChanged += handler;
+        article.RenameTitle("Новый зал");
+
+        Console.WriteLine("Повторяем тот же заголовок: уведомления не будет.");
+        article.RenameTitle("  Новый зал  ");
+
+        Console.WriteLine("Отписываем обработчик и меняем заголовок:");
+        article.TitleChanged -= handler;
+        article.RenameTitle("Другой зал");
+        Console.WriteLine($"Текущий заголовок: {article.Title}");
     }
 
     private static void ReadPreviewLength()

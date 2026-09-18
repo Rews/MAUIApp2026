@@ -19,6 +19,14 @@
     "05 Model errors": {
       "commandName": "Project",
       "commandLineArgs": "--errors"
+    },
+    "06 Delegates Action Func": {
+      "commandName": "Project",
+      "commandLineArgs": "--delegates"
+    },
+    "07 Events subscribe unsubscribe": {
+      "commandName": "Project",
+      "commandLineArgs": "--events"
     }
   }
 }

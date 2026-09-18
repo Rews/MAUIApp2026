@@ -6,6 +6,8 @@ public class NewsArticle
     public string Text { get; }
     public string ImageUrl { get; }
 
+    public event Action<NewsArticle>? TitleChanged;
+
     public NewsArticle(string title, string text, string imageUrl)
     {
         RenameTitle(title);
@@ -24,7 +26,13 @@ public class NewsArticle
         {
             throw new ArgumentException("Нужен заголовок", nameof(title));
         }
-        Title = title.Trim();
+        string newTitle = title.Trim();
+        if (Title == newTitle)
+        {
+            return;
+        }
+        Title = newTitle;
+        TitleChanged?.Invoke(this);
     }
 
     public string GetPreview(int maxLength)
