@@ -27,6 +27,18 @@
     "07 Events subscribe unsubscribe": {
       "commandName": "Project",
       "commandLineArgs": "--events"
+    },
+    "08 Type conversions": {
+      "commandName": "Project",
+      "commandLineArgs": "--conversions"
+    },
+    "09 Inheritance and polymorphism": {
+      "commandName": "Project",
+      "commandLineArgs": "--inheritance"
+    },
+    "10 Type checks is as": {
+      "commandName": "Project",
+      "commandLineArgs": "--type-checks"
     }
   }
 }

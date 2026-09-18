@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration name="10 Type checks is as" type="DotNetProject" factoryName=".NET Project" default="false">
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/NewsAppDemo/NewsAppDemo.csproj" />
+    <option name="PROGRAM_PARAMETERS" value="--type-checks" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NewsAppDemo" />
+    <option name="EXE_PATH" value="" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <option name="RUNTIME_ARGUMENTS" value="" />
+    <option name="RUNTIME_TYPE" value="Core" />
+    <option name="FRAMEWORK" value="net10.0" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

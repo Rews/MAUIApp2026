@@ -44,4 +44,9 @@ public class NewsArticle
         int length = Math.Min(Text.Length, maxLength);
         return Text.Substring(0, length);
     }
+
+    public virtual string GetContentKind()
+    {
+        return "Текст";
+    }
 }

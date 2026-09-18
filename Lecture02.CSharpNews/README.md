@@ -1,6 +1,6 @@
 # Лекция 2. C# на примере приложения новостей
 
-Готовый проект для демонстрации преподавателем в IDE. Он соответствует второй лекции: **NewsArticle, методы, Action/Func и события, асинхронный источник, коллекции, LINQ и проверка данных**. Домашнего задания к этой лекции пока нет.
+Готовый проект для демонстрации преподавателем в IDE. Он соответствует второй лекции: **NewsArticle, VideoNewsArticle, преобразования типов, методы, Action/Func и события, асинхронный источник, коллекции, LINQ и проверка данных**. Домашнего задания к этой лекции пока нет.
 
 Это консольная основа будущего приложения новостей. На следующем занятии начнётся экран MAUI, затем появятся лента, авторизация, избранное и push-уведомления. Здесь нужны только .NET SDK 10 и IDE с поддержкой .NET 10. MAUI, эмулятор, Android SDK, Xcode и внешний сервер для запуска этого примера не требуются.
 
@@ -13,17 +13,20 @@
 3. Дождитесь загрузки решения. Выберите **01 News feed** в списке конфигураций и нажмите **Run** или **Debug**.
 4. Для других частей рассказа выбирайте конфигурации ниже. Для ввода в режиме **04 Preview input** щёлкните консоль запуска, введите значение и нажмите Enter.
 
-Конфигурации Rider сохранены в `.run`. В `NewsAppDemo/Properties/launchSettings.json` есть те же семь профилей для IDE, поддерживающих профили запуска .NET. Без параметров программа выполняет обычный сценарий ленты.
+Конфигурации Rider сохранены в `.run`. В `NewsAppDemo/Properties/launchSettings.json` есть те же десять профилей для IDE, поддерживающих профили запуска .NET. Без параметров программа выполняет обычный сценарий ленты.
 
 | Конфигурация | Аргумент | Что показывает |
 |---|---|---|
 | **01 News feed** | `--demo` | `await`, три новости, `foreach`, LINQ и короткий анонс |
 | **02 References and null** | `--references` | Две ссылки на один объект, изменение заголовка, `?.` и `??` |
-| **03 Task and await** | `--async` | Короткий `LoadTitleAsync` со слайда 14 |
+| **03 Task and await** | `--async` | Короткий `LoadTitleAsync` со слайда 17 |
 | **04 Preview input** | `--interactive` | `TryParse`, положительная длина анонса и повтор ввода |
 | **05 Model errors** | `--errors` | `throw`, `try/catch` и сохранение корректного состояния |
-| **06 Delegates Action Func** | `--delegates` | Вызовы `Action` и `Func`, передача действия в метод, слайд 10 |
-| **07 Events subscribe unsubscribe** | `--events` | `TitleChanged`, подписка, уведомление и отписка, слайд 11 |
+| **06 Delegates Action Func** | `--delegates` | Вызовы `Action` и `Func`, передача действия в метод, слайд 13 |
+| **07 Events subscribe unsubscribe** | `--events` | `TitleChanged`, подписка, уведомление и отписка, слайд 14 |
+| **08 Type conversions** | `--conversions` | Неявное и явное преобразование чисел, TryParse, checked, слайд 5 |
+| **09 Inheritance and polymorphism** | `--inheritance` | NewsArticle и VideoNewsArticle, base, virtual/override, слайд 10 |
+| **10 Type checks is as** | `--type-checks` | is, as, явное приведение и несовместимый тип, слайд 11 |
 
 В другом редакторе можно открыть проект `NewsAppDemo/NewsAppDemo.csproj` и передать соответствующий аргумент запуска.
 
@@ -40,6 +43,9 @@ dotnet run --project NewsAppDemo -- --interactive
 dotnet run --project NewsAppDemo -- --errors
 dotnet run --project NewsAppDemo -- --delegates
 dotnet run --project NewsAppDemo -- --events
+dotnet run --project NewsAppDemo -- --conversions
+dotnet run --project NewsAppDemo -- --inheritance
+dotnet run --project NewsAppDemo -- --type-checks
 ```
 
 Например, тот же запуск через профиль:
@@ -55,19 +61,22 @@ dotnet run --project NewsAppDemo --launch-profile "03 Task and await"
 | Слайды | Файл и место | Что обсудить в отладчике |
 |---|---|---|
 | 3–4 | `Program.RunDemoAsync`, вывод количества и `foreach` | `string`, `int`, интерполяция, последовательный вывод новостей |
-| 6 | `NewsArticle` и его конструктор | Свойства `Title`, `Text`, `ImageUrl`, аргументы и созданный объект |
-| 7 | `NewsArticle.RenameTitle`, строка `Title = newTitle` | `private set`, проверка до изменения и нормализация заголовка |
-| 8 | `Program.ShowReferences`, вызов `selected.RenameTitle(...)` | После Step Over заголовок изменился через обе ссылки. Затем `selected = null`, но `article` всё ещё доступна |
-| 9 | `NewsArticle.GetPreview`, строка `Math.Min(...)` | Параметр `maxLength`, чтение `Text`, строковый результат и неизменность полного текста |
-| 10 | `Program.ShowDelegates` и `Program.ShowArticle` | Создание делегата, вызов Action, результат Func и передача действия как параметра |
-| 11 | `Program.ShowEvents`, `NewsArticle.RenameTitle` и `TitleChanged?.Invoke(this)` | Подписка `+=`, состояние объекта внутри обработчика, повторный заголовок без уведомления и отписка `-=` |
-| 13–14 | `Program.LoadTitleAsync`, строка `await Task.Delay(500)` | Ожидание операции, возврат строки, `Task<string>` и получение результата через `await` |
-| 16–17 | `Program.RunDemoAsync`, цепочка `Where/OrderBy/Select/ToList` | Три исходных объекта, отбор двух заголовков, новый список строк |
-| 18–19 | `DemoNewsSource.LoadNewsAsync` и вызов в `RunDemoAsync` | `INewsSource`, конкретная реализация и `Task<List<NewsArticle>>` |
-| 21 | `Program.ReadPreviewLength`, вызов `int.TryParse` | Текст вместо числа, ноль, корректная длина и повтор попытки |
-| 22 | `Program.ShowErrors`, вызов `article.GetPreview(0)` | Переход в `catch`, затем успешный вызов. Пустой заголовок не меняет новость |
+| 5 | `Program.ShowConversions` | int в double, усечение 2.8 до 2, TryParse и переполнение в checked |
+| 7 | `NewsArticle` и его конструктор | Свойства `Title`, `Text`, `ImageUrl`, аргументы и созданный объект |
+| 8 | `NewsArticle.RenameTitle`, строка `Title = newTitle` | `private set`, проверка до изменения и нормализация заголовка |
+| 9 | `Program.ShowReferences`, вызов `selected.RenameTitle(...)` | После Step Over заголовок изменился через обе ссылки. Затем `selected = null`, но `article` всё ещё доступна |
+| 10 | `VideoNewsArticle` и `Program.ShowInheritance` | Вызов base, унаследованные свойства, одна ссылка через разные типы и virtual/override |
+| 11 | `Program.ShowTypeChecks` | Видеоновость, обычная новость и null; is/as и InvalidCastException при неверном приведении |
+| 12 | `NewsArticle.GetPreview`, строка `Math.Min(...)` | Параметр `maxLength`, чтение `Text`, строковый результат и неизменность полного текста |
+| 13 | `Program.ShowDelegates` и `Program.ShowArticle` | Создание делегата, вызов Action, результат Func и передача действия как параметра |
+| 14 | `Program.ShowEvents`, `NewsArticle.RenameTitle` и `TitleChanged?.Invoke(this)` | Подписка `+=`, состояние объекта внутри обработчика, повторный заголовок без уведомления и отписка `-=` |
+| 16–17 | `Program.LoadTitleAsync`, строка `await Task.Delay(500)` | Ожидание операции, возврат строки, `Task<string>` и получение результата через `await` |
+| 19–20 | `Program.RunDemoAsync`, цепочка `Where/OrderBy/Select/ToList` | Три исходных объекта, отбор двух заголовков, новый список строк |
+| 21–22 | `DemoNewsSource.LoadNewsAsync` и вызов в `RunDemoAsync` | `INewsSource`, конкретная реализация и `Task<List<NewsArticle>>` |
+| 24 | `Program.ReadPreviewLength`, вызов `int.TryParse` | Текст вместо числа, ноль, корректная длина и повтор попытки |
+| 25 | `Program.ShowErrors`, вызов `article.GetPreview(0)` | Переход в `catch`, затем успешный вызов. Пустой заголовок не меняет новость |
 
-После методов перейдите к конфигурациям **06 Delegates Action Func** и **07 Events subscribe unsubscribe**, затем к асинхронности и коллекциям. Их номера добавлены в конец списка, чтобы сохранить привычные названия остальных конфигураций.
+После повторения синтаксиса покажите **08 Type conversions**. После ссылок используйте **09 Inheritance and polymorphism** и **10 Type checks is as**. После методов перейдите к конфигурациям **06 Delegates Action Func** и **07 Events subscribe unsubscribe**, затем к асинхронности и коллекциям. Их номера добавлены в конец списка, чтобы сохранить привычные названия остальных конфигураций.
 
 Первый проход удобно сделать без остановок в **01 News feed**, затем показать объект и метод анонса. Отдельные режимы позволяют повторить нужный фрагмент, не проходя всю программу заново.
 
@@ -105,6 +114,12 @@ dotnet run --project NewsAppDemo --launch-profile "03 Task and await"
 
 В **07 Events subscribe unsubscribe** после подписки обработчик выводит «Новый зал» один раз. Присваивание того же заголовка с пробелами по краям не вызывает нового уведомления. После отписки объект получает заголовок «Другой зал», но обработчик больше не вызывается. Последняя строка отдельно показывает текущее состояние объекта.
 
+В **08 Type conversions** первые строки вывода — `2` и `12`: явное преобразование времени чтения и результат разбора строки. Неявное преобразование количества даёт double со значением 3. Неверная строка даёт false, а выход за диапазон в checked обрабатывается как OverflowException.
+
+В **09 Inheritance and polymorphism** ссылка NewsArticle указывает на VideoNewsArticle. Изменение заголовка видно через обе переменные. `GetContentKind()` через базовую ссылку возвращает «Видео», для обычной новости — «Текст».
+
+В **10 Type checks is as** is и as для видеоновости позволяют прочитать VideoUrl. Обычная новость даёт false у is и null у as. Для null результаты такие же. Явное приведение обычной новости вызывает обработанный InvalidCastException. При успешном приведении сохраняется ссылка на тот же объект.
+
 ## Структура проекта
 
 ```text
@@ -117,6 +132,7 @@ Lecture02.CSharpNews/
 └── NewsAppDemo/
     ├── NewsAppDemo.csproj
     ├── NewsArticle.cs            # Модель и правила работы с новостью
+    ├── VideoNewsArticle.cs       # Производный класс, base и override
     ├── INewsSource.cs            # Контракт получения списка
     ├── DemoNewsSource.cs         # Три учебные новости и задержка
     ├── Program.cs               # Точка входа и демонстрационные сценарии
@@ -125,6 +141,10 @@ Lecture02.CSharpNews/
 ```
 
 ## Правила примера
+
+- `VideoNewsArticle` наследует NewsArticle и добавляет VideoUrl. Ссылка на видео обязательна, но её доступность не проверяется. Видеофайл не загружается.
+- `GetContentKind` объявлен virtual в базовом классе и override в производном. Остальные методы модели сохраняют своё поведение.
+- Приведение ссылок не создаёт копию объекта. `is` проверяет совместимость, `as` для несовместимого объекта возвращает null, явное приведение ненулевого несовместимого объекта выбрасывает InvalidCastException.
 
 - Заголовок и текст обязательны. Заголовок очищается от пробелов по краям.
 - `ImageUrl` может быть пустой строкой, если картинки нет. Доступность адреса здесь не проверяется.
