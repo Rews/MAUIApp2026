@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration name="Debug iOS" type="XamarinIOSProject" factoryName="Xamarin.iOS" default="false">
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Lecture01.MauiDemo/Lecture01.MauiDemo.csproj" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="IS_PASS_PARENT_ENVS" value="false" />
+    <option name="EXTRA_MLAUNCH_PARAMETERS" value="" />
+    <option name="PLATFORM_TYPE" value="IOS" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

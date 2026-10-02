@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.ChoicePage" Title="Выбор" x:DataType="{x:Null}">
+
+
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Как пользователь делает выбор" Style="{StaticResource Heading}" />
+   <Label Text="CheckBox · Switch · RadioButton · Picker · DatePicker · TimePicker" />
+   <Border>
+    <VerticalStackLayout Spacing="10">
+     <HorizontalStackLayout Spacing="16">
+      <CheckBox x:Name="ConsentCheck" />
+      <Label Text="Подтверждаю участие" VerticalOptions="Center" />
+     </HorizontalStackLayout>
+     <HorizontalStackLayout Spacing="8">
+      <Switch x:Name="ReminderSwitch" IsToggled="True" />
+      <Label Text="Напомнить о занятии" VerticalOptions="Center" />
+     </HorizontalStackLayout>
+     <Label Text="Формат участия" Style="{StaticResource Section}" />
+     <!-- Одинаковый GroupName объединяет RadioButton: в группе выбран только один вариант. -->
+     <RadioButton x:Name="OfflineRadio" Content="В аудитории" GroupName="Attendance" IsChecked="True" />
+     <RadioButton Content="Онлайн" GroupName="Attendance" />
+     <RadioButton Content="Онлайн 2" GroupName="Attendance" />
+     <Label Text="Тема занятия" />
+     <!-- Picker хранит выбранный элемент в SelectedItem; до выбора там может быть null. -->
+     <Picker x:Name="TopicPicker" Title="Выберите тему">
+      <Picker.Items>
+       <x:String>Контролы</x:String>
+       <x:String>Контейнеры</x:String>
+       <x:String>Навигация</x:String>
+      </Picker.Items>
+     </Picker>
+     <Label Text="Дата и время" />
+     <!-- Format задаёт вид даты и времени на экране. Значения читаем через Date и Time. -->
+     <DatePicker x:Name="LessonDate" Format="yyyy.MM.dd" />
+     <TimePicker x:Name="LessonTime" Time="18:00:00" Format="HH:mm" />
+     <Button Text="Показать выбор" Clicked="OnShowChoiceClicked" />
+    </VerticalStackLayout>
+   </Border>
+   <Label x:Name="ChoiceResult" Text="Здесь появятся выбранные значения." />
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.LayoutsPage" Title="Контейнеры" x:DataType="{x:Null}">
+
+
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Кто отвечает за расположение" Style="{StaticResource Heading}" />
+   <Label Text="ContentPage содержит один корневой элемент. Здесь это ScrollView с VerticalStackLayout." />
+   <Label Text="StackLayout / Orientation" Style="{StaticResource Section}" />
+   <!-- StackLayout выбирает направление через Orientation; у Vertical/HorizontalStackLayout оно задано самим типом. -->
+   <StackLayout Orientation="Horizontal" Spacing="8">
+    <Border><Label Text="A" /></Border><Border><Label Text="B" /></Border><Border><Label Text="C" /></Border>
+   </StackLayout>
+   <Label Text="VerticalStackLayout + HorizontalStackLayout" Style="{StaticResource Section}" />
+   <Border>
+    <VerticalStackLayout Spacing="10">
+     <Label Text="Новость университета" FontAttributes="Bold" />
+     <HorizontalStackLayout Spacing="18">
+      <Label Text="Кампус" /><Label Text="3 минуты" />
+     </HorizontalStackLayout>
+     <Label Text="Внешний контейнер располагает строки вертикально, внутренний — подписи горизонтально." />
+    </VerticalStackLayout>
+   </Border>
+   <Label Text="Grid / Auto и *" Style="{StaticResource Section}" />
+   <Border>
+    <!-- Auto занимает место по содержимому, * — оставшееся. Номера строк и колонок начинаются с 0. -->
+    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="24" ColumnSpacing="16">
+     <Label Grid.Row="0" Grid.Column="0" Text="Тема" VerticalOptions="Center" />
+     <Entry Grid.Row="0" Grid.Column="1" Placeholder="Оставшееся место у колонки *" />
+     <!-- Grid.Row и Grid.ColumnSpan — присоединённые свойства: ребёнок сообщает Grid, куда его поместить. -->
+     <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Эта строка занимает обе колонки — ColumnSpan=2." />
+    </Grid>
+   </Border>
+   <Label Text="FlexLayout / Wrap" Style="{StaticResource Section}" />
+   <Label Text="Сузьте окно: метки переносятся на следующую строку." />
+   <!-- Wrap переносит элементы на новую строку, когда ширины окна не хватает. -->
+   <FlexLayout Direction="Row" Wrap="Wrap">
+    <Border Margin="0,0,8,8"><Label Text="Университет" /></Border>
+    <Border Margin="0,0,8,8"><Label Text="Разработка" /></Border>
+    <Border Margin="0,0,8,8"><Label Text="Android" /></Border>
+    <Border Margin="0,0,8,8"><Label Text="iOS" /></Border>
+    <Border Margin="0,0,8,8"><Label Text="События кампуса" /></Border>
+   </FlexLayout>
+   <Label Text="Border / оформление одного дочернего элемента" Style="{StaticResource Section}" />
+   <!-- Border оформляет один дочерний элемент; для нескольких контролов внутрь помещают контейнер. -->
+   <Border Stroke="#2563A6" StrokeThickness="5" StrokeShape="RoundRectangle 20" Padding="20" Margin="0,4">
+    <Label Text="Padding — отступ внутри рамки. Margin — снаружи. Spacing задаётся контейнеру между детьми." />
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

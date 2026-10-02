@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- xmlns задаёт типы MAUI без префикса; xmlns:x — конструкции языка XAML. x:Class связывает страницу с C#-классом. -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.TextPage" Title="Текст и ввод" x:DataType="{x:Null}">
+
+
+ <!-- У страницы один корневой элемент. ScrollView прокручивает содержимое, а VerticalStackLayout располагает его по вертикали. -->
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Первый экран начинается здесь" Style="{StaticResource Heading}" />
+   <Label Text="Label · Image · Entry · Editor · Button" />
+   <!-- Имя локального изображения из Resources/Images; AspectFit сохраняет пропорции. -->
+   <Image Source="dotnet_bot.png" HeightRequest="120" Aspect="AspectFit" SemanticProperties.Description="Робот .NET — локальное изображение" />
+   <Border>
+    <VerticalStackLayout Spacing="12">
+     <Label Text="Заголовок новости" Style="{StaticResource Section}" />
+     <!-- Entry — одна строка, Editor — несколько. x:Name позволяет обратиться к объекту из code-behind. -->
+     <Entry x:Name="TitleEntry" Placeholder="Например: Открылась запись на курс" MaxLength="80" />
+     <Label Text="Короткое описание" />
+     <Editor x:Name="SummaryEditor" Placeholder="Несколько строк о событии" AutoSize="TextChanges" MinimumHeightRequest="150" />
+     <!-- Clicked связывает нажатие с методом OnPreviewClicked в TextPage.xaml.cs. -->
+     <Button Text="Показать превью" Clicked="OnPreviewClicked" />
+    </VerticalStackLayout>
+   </Border>
+   <Border>
+    <VerticalStackLayout Spacing="10">
+     <Label Text="Превью" Style="{StaticResource Section}" />
+     <Label x:Name="PreviewTitle" Text="Здесь появится заголовок" FontAttributes="Bold" />
+     <Label x:Name="PreviewSummary" Text="Введите текст и нажмите кнопку." />
+    </VerticalStackLayout>
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.BindingsPage" Title="Локальные привязки" x:DataType="{x:Null}">
+ <!-- Префикс converters указывает на наши C#-типы. x:Key задаёт ключ для поиска экземпляра через StaticResource. -->
+ 
+ 
+ <ContentPage.Resources>
+  <converters:BoolToStatusConverter x:Key="BoolToStatus" />
+  <converters:TextToColorConverter x:Key="TextToColor" />
+ </ContentPage.Resources>
+ 
+
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Один контрол наблюдает за другим" Style="{StaticResource Heading}" />
+   <Label Text="x:Name → x:Reference → Path. Все источники находятся на этой странице." />
+   <Border>
+    <VerticalStackLayout Spacing="12">
+     <Label Text="Entry.Text → Label.Text" Style="{StaticResource Section}" />
+     
+     
+     
+     
+     <Entry x:Name="AuthorEntry" Text="Анна" Placeholder="Имя автора"/>
+     <!-- Source указывает на контрол по x:Name, Path — на его свойство. OneWay передаёт изменения от источника к цели. -->
+     <Label Text="{Binding Source={x:Reference AuthorEntry}, Path=Text, Mode=OneWay, StringFormat='Автор: {0}'}" />
+     
+     
+     
+     <Label Text="Slider.Value → Label.FontSize" Style="{StaticResource Section}" />
+     <Slider x:Name="FontSlider" Minimum="16" Maximum="40" Value="24" />
+     <Label Text="Размер меняется без обработчика" FontSize="{Binding Source={x:Reference FontSlider}, Path=Value, Mode=OneWay}" />
+     <!-- StringFormat меняет только отображение числа: F0 выводит его без дробных знаков. -->
+     <Label Text="{Binding Source={x:Reference FontSlider}, Path=Value, Mode=OneWay, StringFormat='Размер: {0:F0}'}" />
+     
+     
+     
+     
+    </VerticalStackLayout>
+   </Border>
+   <Border>
+    <VerticalStackLayout Spacing="12">
+     <Label Text="CheckBox.IsChecked → Button.IsEnabled" Style="{StaticResource Section}" />
+     <HorizontalStackLayout Spacing="8">
+      <CheckBox x:Name="AgreeCheck" IsChecked="False"/>
+      <Label Text="Разрешить действие" VerticalOptions="Center" />
+     </HorizontalStackLayout>
+     
+     <!-- Оба свойства имеют тип bool: значение IsChecked можно передать в IsEnabled без конвертера. -->
+     <Button Text="Действие доступно" IsEnabled="{Binding Source={x:Reference AgreeCheck}, Path=IsChecked, Mode=OneWay}" Clicked="OnActionClicked" />
+    
+     <Label x:Name="ActionResult" Text="Сначала установите флажок." />
+    </VerticalStackLayout>
+   </Border>
+   <Border>
+    <VerticalStackLayout Spacing="12">
+     
+     
+     <Label Text="Switch.IsToggled → конвертер → Label.Text" Style="{StaticResource Section}" />
+     <Switch x:Name="NotificationSwitch" IsToggled="False"/>
+     <!-- Конвертер получает bool от Switch и возвращает строку для Label.Text. -->
+     <Label Text="{Binding Source={x:Reference NotificationSwitch}, Path=IsToggled, Mode=OneWay, Converter={StaticResource BoolToStatus}}" />
+     
+     
+     
+     
+     
+    </VerticalStackLayout>
+   </Border>
+   <Border>
+    <VerticalStackLayout Spacing="12">
+     <Label Text="Entry.Text → конвертер → Border.BackgroundColor" Style="{StaticResource Section}" />
+     <Label Text="Введите название цвета" />
+     
+     
+     <Entry x:Name="ColorNameEntry" Text="синий" Placeholder="Например: красный или red" IsTextPredictionEnabled="False" />
+     
+     <!-- При изменении Entry.Text конвертер возвращает Color для фона Border; обработчик TextChanged не нужен. -->
+     <Border HeightRequest="80" Padding="0"
+             BackgroundColor="{Binding Source={x:Reference ColorNameEntry}, Path=Text, Mode=OneWay, Converter={StaticResource TextToColor}}" />
+    
+     
+     
+     <Label Text="Регистр и пробелы по краям не важны. Пустое поле или неизвестное название — светло-серый образец." />
+    </VerticalStackLayout>
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

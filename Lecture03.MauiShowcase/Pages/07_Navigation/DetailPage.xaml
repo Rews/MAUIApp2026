@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.DetailPage" Title="Подробности" x:DataType="{x:Null}">
+
+
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Это отдельная страница" Style="{StaticResource Heading}" />
+   <Border>
+    <VerticalStackLayout Spacing="14">
+     <Label Text="Маршрут зарегистрирован в App.xaml.cs. Shell добавил эту страницу в стек навигации." />
+     <Label Text="GoToAsync(&quot;..&quot;) возвращает на предыдущую страницу." />
+     <!-- Возврат выполняет обработчик в code-behind; создавать новую NavigationPage не требуется. -->
+     <Button Text="Вернуться назад" Clicked="OnBackClicked" />
+    </VerticalStackLayout>
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

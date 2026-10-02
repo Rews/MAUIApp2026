@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.ValuesPage" Title="Значения и загрузка" x:DataType="{x:Null}">
+
+
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Числа и состояние операции" Style="{StaticResource Heading}" />
+   <Label Text="Slider · Stepper · ProgressBar · ActivityIndicator" />
+   <Border>
+    <VerticalStackLayout Spacing="14">
+     <Label Text="Размер текста" Style="{StaticResource Section}" />
+     <!-- Slider меняет число в диапазоне; ValueChanged передаёт новое значение в C#. -->
+     <Slider x:Name="SizeSlider" Minimum="16" Maximum="400" Value="24" ValueChanged="OnSizeChanged" />
+     <Label x:Name="SizePreview" Text="Новость дня" FontSize="24" />
+     <Label Text="Количество билетов" Style="{StaticResource Section}" />
+     <!-- Stepper меняет Value на заданный Increment; здесь выбираем от 1 до 5 билетов. -->
+     <Stepper x:Name="TicketStepper" Minimum="1" Maximum="5" Value="1" Increment="1" ValueChanged="OnTicketsChanged" />
+     <Label x:Name="TicketLabel" Text="Билетов: 1" />
+    </VerticalStackLayout>
+   </Border>
+   <Border>
+    <VerticalStackLayout Spacing="14">
+     <Label Text="Учебная имитация загрузки" Style="{StaticResource Section}" />
+     <Label Text="ProgressBar показывает долю 0…1, ActivityIndicator — сам факт ожидания." />
+     <!-- Progress — доля от 0 до 1. ActivityIndicator показывает ожидание без указания процента. -->
+     <ProgressBar x:Name="LoadingProgress" Progress="0"  ProgressColor="#002200 "/>
+     <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" IsVisible="False" Color="#2563A6" />
+     <Label x:Name="LoadingStatus" Text="Готово к запуску" />
+     <Button x:Name="LoadButton" Text="Запустить загрузку" Clicked="OnLoadClicked" />
+    </VerticalStackLayout>
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

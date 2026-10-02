@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Lecture03.MauiShowcase"
+ xmlns:models="clr-namespace:Lecture03.MauiShowcase.Models"
+ xmlns:converters="clr-namespace:Lecture03.MauiShowcase.Converters"
+ x:Class="Lecture03.MauiShowcase.Pages.NavigationPage" Title="Навигация" x:DataType="{x:Null}">
+
+ <!-- ToolbarItem добавляет действие в панель страницы; Clicked обрабатывается как нажатие кнопки. -->
+ <ContentPage.ToolbarItems>
+  <ToolbarItem Text="О лекции" Clicked="OnAboutClicked" />
+ </ContentPage.ToolbarItems>
+ 
+ <ScrollView>
+  <VerticalStackLayout Padding="24" Spacing="14" MaximumWidthRequest="800" HorizontalOptions="Fill">
+   <Label Text="Как устроен AppShell" Style="{StaticResource Heading}" />
+   <Label Text="FlyoutItem задаёт пункт меню, Tab — вкладку. Каждый ShellContent открывает ContentPage." />
+   
+   <Border>
+    <VerticalStackLayout Spacing="14">
+     <Label Text="Переход и возврат" Style="{StaticResource Section}" />
+     <Label Text="Откройте подробности, затем вернитесь кнопкой на странице или стрелкой в заголовке." />
+     <!-- Переход выполнит Shell по зарегистрированному маршруту, а не заменой содержимого этой страницы. -->
+     <Button Text="Открыть подробности" Clicked="OnOpenDetailsClicked" />
+     <Label Text="В заголовке есть действие «О лекции» — это ToolbarItem." />
+    </VerticalStackLayout>
+   </Border>
+   
+   <Border>
+    <VerticalStackLayout Spacing="14">
+     <Label Text="Два варианта главной навигации" Style="{StaticResource Section}" />
+     <Label Text="Переключение создаёт новую оболочку и сбрасывает введённые значения. В режиме вкладок вернуться можно здесь, на вкладке «Навигация»." />
+     
+     <Button Text="Показать TabBar" Clicked="OnTabsClicked" />
+     <Button Text="Вернуть меню Flyout" Clicked="OnFlyoutClicked" />
+    </VerticalStackLayout>
+   </Border>
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

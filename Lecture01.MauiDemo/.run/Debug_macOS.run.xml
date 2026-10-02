@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration name="Debug macOS" type="XamarinMacProject" factoryName="Xamarin.Mac" default="false">
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Lecture01.MauiDemo/Lecture01.MauiDemo.csproj" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="PASS_PARENT_ENVS_MAC" value="1" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

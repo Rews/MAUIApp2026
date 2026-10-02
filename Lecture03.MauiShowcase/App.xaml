@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Lecture03.MauiShowcase.App">
+ <Application.Resources>
+  <ResourceDictionary>
+   <!-- Ресурсы приложения доступны на страницах: StaticResource ищет значение по x:Key. -->
+   <Color x:Key="Ink">#192C43</Color>
+   <Color x:Key="Accent">#2563A6</Color>
+   <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+    <Setter Property="BackgroundColor" Value="#F4F6F9" />
+   </Style>
+   <!-- Стиль без x:Key применяется к Label автоматически; свойства конкретного элемента могут его переопределить. -->
+   <Style TargetType="Label">
+    <Setter Property="TextColor" Value="{StaticResource Ink}" />
+    <Setter Property="FontSize" Value="17" />
+   </Style>
+   <!-- Именованный стиль применяется явно: Style="{StaticResource Heading}". -->
+   <Style x:Key="Heading" TargetType="Label">
+    <Setter Property="FontSize" Value="28" />
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="TextColor" Value="{StaticResource Ink}" />
+   </Style>
+   <Style x:Key="Section" TargetType="Label">
+    <Setter Property="FontSize" Value="20" />
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="TextColor" Value="{StaticResource Accent}" />
+    <Setter Property="Margin" Value="0,12,0,0" />
+   </Style>
+   <Style TargetType="Border">
+    <Setter Property="BackgroundColor" Value="White" />
+    <Setter Property="Stroke" Value="#DCE3ED" />
+    <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+    <Setter Property="Padding" Value="16" />
+   </Style>
+   <Style TargetType="Button">
+    <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+    <Setter Property="TextColor" Value="White" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Padding" Value="16,12" />
+    <Setter Property="MinimumHeightRequest" Value="48" />
+   </Style>
+   <Style TargetType="Entry"><Setter Property="TextColor" Value="{StaticResource Ink}" /></Style>
+   <Style TargetType="Editor"><Setter Property="TextColor" Value="{StaticResource Ink}" /></Style>
+  </ResourceDictionary>
+ </Application.Resources>
+</Application>

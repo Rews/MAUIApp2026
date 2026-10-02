@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+.idea/
+.vs/
+*.DotSettings.user
+*.suo
+*.user
+.DS_Store
+Directory.Build.local.props
+.env

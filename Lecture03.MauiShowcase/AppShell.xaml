@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:pages="clr-namespace:Lecture03.MauiShowcase.Pages" x:Class="Lecture03.MauiShowcase.AppShell"
+ FlyoutBehavior="Flyout" FlyoutHeaderBehavior="Fixed"
+ BackgroundColor="White" ForegroundColor="#192C43" TitleColor="#192C43">
+ 
+ <Shell.FlyoutHeader>
+  <VerticalStackLayout Padding="24,32,24,24" Spacing="8" BackgroundColor="#E6EEF9">
+   <Label Text="MAUI / 03" Style="{StaticResource Heading}" />
+   <Label Text="Контролы · Контейнеры · Shell" FontSize="15" />
+  </VerticalStackLayout>
+ </Shell.FlyoutHeader>
+ 
+ 
+ <!-- FlyoutItem — пункт бокового меню. ShellContent задаёт страницу, DataTemplate создаёт её при необходимости. -->
+ <FlyoutItem Title="01 · Текст и ввод" Route="section1">
+  <ShellContent Title="01 · Текст и ввод" Route="page1" ContentTemplate="{DataTemplate pages:TextPage}" />
+ </FlyoutItem>
+ 
+ <!-- Префикс pages связан с C# namespace страниц; Route — имя в структуре навигации Shell. -->
+ <FlyoutItem Title="02 · Выбор" Route="section2">
+  <ShellContent Title="02 · Выбор" Route="page2" ContentTemplate="{DataTemplate pages:ChoicePage}" />
+ </FlyoutItem>
+ 
+ <FlyoutItem Title="03 · Значения и загрузка" Route="section3">
+  <ShellContent Title="03 · Значения и загрузка" Route="page3" ContentTemplate="{DataTemplate pages:ValuesPage}" />
+ </FlyoutItem>
+ 
+ <FlyoutItem Title="04 · Контейнеры" Route="section4">
+  <ShellContent Title="04 · Контейнеры" Route="page4" ContentTemplate="{DataTemplate pages:LayoutsPage}" />
+ </FlyoutItem>
+ 
+ <FlyoutItem Title="05 · Локальные привязки" Route="section5">
+  <ShellContent Title="05 · Локальные привязки" Route="page5" ContentTemplate="{DataTemplate pages:BindingsPage}" />
+ </FlyoutItem>
+ 
+ <FlyoutItem Title="06 · Список новостей" Route="section6">
+  <ShellContent Title="06 · Список новостей" Route="page6" ContentTemplate="{DataTemplate pages:NewsPage}" />
+ </FlyoutItem>
+ 
+ <FlyoutItem Title="07 · Навигация" Route="section7">
+  <ShellContent Title="07 · Навигация" Route="page7" ContentTemplate="{DataTemplate pages:NavigationPage}" />
+ </FlyoutItem>
+</Shell>

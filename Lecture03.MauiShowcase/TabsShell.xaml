@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:pages="clr-namespace:Lecture03.MauiShowcase.Pages" x:Class="Lecture03.MauiShowcase.TabsShell">
+ <!-- Альтернатива боковому меню: TabBar содержит вкладки Tab, каждая открывает страницу через ShellContent. -->
+ <TabBar>
+  <Tab Title="Текст"><ShellContent ContentTemplate="{DataTemplate pages:TextPage}" /></Tab>
+  <Tab Title="Привязки"><ShellContent ContentTemplate="{DataTemplate pages:BindingsPage}" /></Tab>
+  <Tab Title="Выбор"><ShellContent Title="02 · Выбор" ContentTemplate="{DataTemplate pages:ChoicePage}" /></Tab>
+  <Tab Title="Навигация"><ShellContent ContentTemplate="{DataTemplate pages:NavigationPage}" /></Tab>
+ </TabBar>
+</Shell>
